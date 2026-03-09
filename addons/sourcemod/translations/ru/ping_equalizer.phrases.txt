@@ -1,0 +1,44 @@
+"Phrases"
+{
+    "TAG"
+    {
+        "ru"            "<{green}Fakelag{default}> "
+    }
+
+    "VOTE_COULDOWN"
+    {
+        "#format"       "{1:d}"
+        "ru"            "Сейчас нельзя начать голосование, попробуйте снова через {1} сек"
+    }
+
+    "VOTE_EQUALIZE_ENABLE"
+    {
+        "ru"            "Включить выравнивание пинга?"
+    }
+
+    "VOTE_EQUALIZE_DISABLE"
+    {
+        "ru"            "Выключить выравнивание пинга?"
+    }
+
+    "MENU_TITLE"
+    {
+        "ru"            "Управление FakeLag:\n "
+    }
+
+    "MENU_ITEM"
+    {
+        "#format"       "{1:.2f},{2:N}"
+        "ru"            "[{1}ms] {2}"
+    }
+
+    "MENU_EQUALIZE_ENABLE"
+    {
+        "ru"            "Включить выравнивание пинга\n "
+    }
+
+    "MENU_EQUALIZE_DISABLE"
+    {
+        "ru"            "Выключить выравнивание пинга\n "
+    }
+}

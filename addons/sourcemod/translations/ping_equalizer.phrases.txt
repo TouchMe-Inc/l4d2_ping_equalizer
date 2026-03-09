@@ -1,0 +1,44 @@
+"Phrases"
+{
+	"TAG"
+	{
+		"en"			"<{green}Fakelag{default}> "
+	}
+
+	"VOTE_COULDOWN"
+	{
+		"#format"		"{1:d}"
+		"en"			"A vote cannot be called at this moment, try again in a {1} second"
+	}
+
+	"VOTE_EQUALIZE_ENABLE"
+	{
+		"en"			"Enable ping equalization?"
+	}
+
+	"VOTE_EQUALIZE_DISABLE"
+	{
+		"en"			"Disable ping equalization?"
+	}
+
+	"MENU_TITLE"
+	{
+		"en"			"FakeLag Control:\n "
+	}
+
+	"MENU_ITEM"
+	{
+		"#format"		"{1:.2f},{2:N}"
+		"en"			"[{1}ms] {2}"
+	}
+
+	"MENU_EQUALIZE_ENABLE"
+	{
+		"en"			"Enable ping equalization\n "
+	}
+
+	"MENU_EQUALIZE_DISABLE"
+	{
+		"en"			"Disable ping equalization\n "
+	}
+}
