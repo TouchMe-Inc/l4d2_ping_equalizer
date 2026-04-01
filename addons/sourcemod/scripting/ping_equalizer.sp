@@ -79,7 +79,7 @@ Action Timer_EqualizePing(Handle hTimer)
     return Plugin_Continue;
 }
 
-Action Cmd_FakeLag(int iClient, int args)
+Action Cmd_FakeLag(int iClient, int iArgs)
 {
     if (iClient <= 0) {
         return Plugin_Handled;
@@ -98,11 +98,11 @@ void ShowFakeLagMenu(int iClient)
 
     char szBuffer[64];
     FormatEx(szBuffer, sizeof szBuffer, "%T", !g_bEqualizePing ? "MENU_EQUALIZE_ENABLE" : "MENU_EQUALIZE_DISABLE", iClient);
-    AddMenuItem(hMenu, "switcher", szBuffer, ITEMDRAW_DEFAULT);
+    AddMenuItem(hMenu, "switcher", szBuffer, GetClientTeam(iClient) > TEAM_SPECTATOR ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 
     for (int iPlayer = 1; iPlayer <= MaxClients; iPlayer ++)
     {
-        if (!IsClientInGame(iPlayer) || IsFakeClient(iPlayer)) {
+        if (!IsClientInGame(iPlayer) || IsFakeClient(iPlayer) || GetClientTeam(iPlayer) <= TEAM_SPECTATOR) {
             continue;
         }
 
@@ -123,7 +123,16 @@ int HandlerFakeLagMenu(Menu hMenu, MenuAction action, int iClient, int iItem)
     {
         case MenuAction_End: delete hMenu;
 
-        case MenuAction_Select: RunVote(iClient);
+        case MenuAction_Select:
+        {
+            if (GetClientTeam(iClient) <= TEAM_SPECTATOR)
+            {
+                ShowFakeLagMenu(iClient);
+                return 0;
+            }
+
+            RunVote(iClient);
+        }
     }
 
     return 0;
@@ -142,7 +151,7 @@ void RunVote(int iClient)
 
     for (int iPlayer = 1; iPlayer <= MaxClients; iPlayer ++)
     {
-        if (!IsClientInGame(iPlayer) || IsFakeClient(iPlayer) || GetClientTeam(iPlayer) <= 1) {
+        if (!IsClientInGame(iPlayer) || IsFakeClient(iPlayer) || GetClientTeam(iPlayer) <= TEAM_SPECTATOR) {
             continue;
         }
 
@@ -170,7 +179,7 @@ Action HandlerVote(NativeVote hVote, VoteAction tAction, int iParam1, int iParam
         {
             char szVoteDisplayMessage[128];
 
-            FormatEx(szVoteDisplayMessage, sizeof szVoteDisplayMessage, "%T", 
+            FormatEx(szVoteDisplayMessage, sizeof szVoteDisplayMessage, "%T",
                 !g_bEqualizePing ? "VOTE_EQUALIZE_ENABLE" : "VOTE_EQUALIZE_DISABLE" , iParam1);
 
             hVote.SetDetails(szVoteDisplayMessage);
